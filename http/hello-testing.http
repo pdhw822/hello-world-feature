@@ -2,5 +2,5 @@ POST http://localhost:4440/api/40/act/hello-world/say-hello
 X-Rundeck-Auth-Token: DevMe
 
 ###
-GET http://localhost:4440/api/40/output/67b262da-4289-4346-b9b8-9e32205fcd3e
+GET http://localhost:4440/api/40/output/b880151e-bd5f-4115-853f-437e9acdd34f
 X-Rundeck-Auth-Token: DevMe

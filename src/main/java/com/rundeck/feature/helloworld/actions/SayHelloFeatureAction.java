@@ -21,12 +21,13 @@ public class SayHelloFeatureAction implements FeatureAction<SayHelloFeatureActio
             SayHelloFeatureActionData data = featureActionContext.get(FeatureActionContext.KEY_ACTION_DATA, SayHelloFeatureActionData.class);
             if(data == null) data = new SayHelloFeatureActionData();
             HelloWorldFeatureConfig featureConfig = featureActionContext.get(FeatureActionContext.KEY_FEATURE_CONFIG, HelloWorldFeatureConfig.class);
+            if(featureConfig == null) featureConfig = new HelloWorldFeatureConfig();
             featureActionContext.getEventPublisher().publishOutput(new DefaultActionOutputEvent(featureActionContext.getActionId(),
                     String.format("Hello %s", Optional.ofNullable(data.getSayHelloTo()).orElse(featureConfig.getDefaultSayHelloTo()))));
             featureActionContext.getEventPublisher().publishCompletion(new SuccessActionCompleteEvent(featureActionContext.getActionId()));
         } catch(Exception ex) {
             featureActionContext.getEventPublisher().publishOutput(new DefaultActionOutputEvent(featureActionContext.getActionId(), OutputLevel.ERROR,
-                            ex.getMessage(), System.nanoTime()));
+                            ex.getCause().getMessage(), System.nanoTime()));
             featureActionContext.getEventPublisher().publishCompletion(new FailureActionCompletion(featureActionContext.getActionId()));
         }
 

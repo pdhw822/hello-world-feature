@@ -16,7 +16,7 @@ public class HelloWorldFeature implements Feature<HelloWorldFeatureConfig> {
     boolean running = false;
 
     Map<String, FeatureAction<?>> features = Map.of(SayHelloFeatureAction.ACTION, new SayHelloFeatureAction());
-    HelloWorldFeatureConfig config;
+    HelloWorldFeatureConfig config = new HelloWorldFeatureConfig();
     public String getName() {
         return "hello-world";
     }
@@ -55,6 +55,11 @@ public class HelloWorldFeature implements Feature<HelloWorldFeatureConfig> {
 
     public void configure(HelloWorldFeatureConfig helloWorldFeatureConfig) {
         this.config = helloWorldFeatureConfig;
+    }
+
+    @Override
+    public HelloWorldFeatureConfig getConfiguration() {
+        return config;
     }
 
     public Class<HelloWorldFeatureConfig> getConfigClass() {
