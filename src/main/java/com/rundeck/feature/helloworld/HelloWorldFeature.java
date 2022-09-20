@@ -11,7 +11,6 @@ import java.util.Map;
 import java.util.Optional;
 
 @Component
-@EnableAutoConfiguration
 public class HelloWorldFeature implements Feature<HelloWorldFeatureConfig> {
     boolean enabled = true;
     boolean running = false;
