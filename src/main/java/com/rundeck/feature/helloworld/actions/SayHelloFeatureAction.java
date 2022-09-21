@@ -2,11 +2,10 @@ package com.rundeck.feature.helloworld.actions;
 
 import com.rundeck.feature.api.action.FeatureAction;
 import com.rundeck.feature.api.context.FeatureActionContext;
+import com.rundeck.feature.api.model.CompletionStatus;
 import com.rundeck.feature.api.output.OutputLevel;
 import com.rundeck.feature.helloworld.DefaultActionOutputEvent;
-import com.rundeck.feature.helloworld.FailureActionCompletion;
 import com.rundeck.feature.helloworld.HelloWorldFeatureConfig;
-import com.rundeck.feature.helloworld.SuccessActionCompleteEvent;
 
 import java.util.Optional;
 
@@ -21,7 +20,7 @@ public class SayHelloFeatureAction implements FeatureAction<SayHelloFeatureActio
         return "Says Hello to a provided name in the logs";
     }
 
-    public void execute(final FeatureActionContext featureActionContext) {
+    public CompletionStatus execute(final FeatureActionContext featureActionContext) {
         try {
             SayHelloFeatureActionData data = featureActionContext.get(FeatureActionContext.KEY_ACTION_DATA, SayHelloFeatureActionData.class);
             if(data == null) data = new SayHelloFeatureActionData();
@@ -29,11 +28,11 @@ public class SayHelloFeatureAction implements FeatureAction<SayHelloFeatureActio
             if(featureConfig == null) featureConfig = new HelloWorldFeatureConfig();
             featureActionContext.getEventPublisher().publishOutput(new DefaultActionOutputEvent(featureActionContext.getActionId(),
                     String.format("Hello %s", Optional.ofNullable(data.getSayHelloTo()).orElse(featureConfig.getDefaultSayHelloTo()))));
-            featureActionContext.getEventPublisher().publishCompletion(new SuccessActionCompleteEvent(featureActionContext.getActionId()));
+            return CompletionStatus.SUCCESS;
         } catch(Exception ex) {
             featureActionContext.getEventPublisher().publishOutput(new DefaultActionOutputEvent(featureActionContext.getActionId(), OutputLevel.ERROR,
                             ex.getCause().getMessage(), System.nanoTime()));
-            featureActionContext.getEventPublisher().publishCompletion(new FailureActionCompletion(featureActionContext.getActionId()));
+            return CompletionStatus.ERROR;
         }
 
     }
