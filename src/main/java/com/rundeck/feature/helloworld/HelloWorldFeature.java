@@ -3,7 +3,6 @@ package com.rundeck.feature.helloworld;
 import com.rundeck.feature.api.Feature;
 import com.rundeck.feature.api.action.FeatureAction;
 import com.rundeck.feature.helloworld.actions.SayHelloFeatureAction;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
@@ -13,7 +12,6 @@ import java.util.Optional;
 @Component
 public class HelloWorldFeature implements Feature<HelloWorldFeatureConfig> {
     boolean enabled = true;
-    boolean running = false;
 
     Map<String, FeatureAction<?>> features = Map.of(SayHelloFeatureAction.ACTION, new SayHelloFeatureAction());
     HelloWorldFeatureConfig config = new HelloWorldFeatureConfig();
@@ -25,10 +23,6 @@ public class HelloWorldFeature implements Feature<HelloWorldFeatureConfig> {
         return enabled;
     }
 
-    public boolean isRunning() {
-        return running;
-    }
-
     public void enable() {
         enabled = true;
     }
@@ -37,11 +31,8 @@ public class HelloWorldFeature implements Feature<HelloWorldFeatureConfig> {
         enabled = false;
     }
 
-    public void start() {
-
-    }
-
-    public void stop() {
+    @Override
+    public void cleanup() {
 
     }
 

@@ -1,7 +1,7 @@
 package com.rundeck.feature.helloworld.actions;
 
 import com.rundeck.feature.api.action.FeatureAction;
-import com.rundeck.feature.api.action.FeatureActionContext;
+import com.rundeck.feature.api.context.FeatureActionContext;
 import com.rundeck.feature.api.output.OutputLevel;
 import com.rundeck.feature.helloworld.DefaultActionOutputEvent;
 import com.rundeck.feature.helloworld.FailureActionCompletion;
@@ -14,6 +14,11 @@ public class SayHelloFeatureAction implements FeatureAction<SayHelloFeatureActio
     public static final String ACTION = "say-hello";
     public String getName() {
         return ACTION;
+    }
+
+    @Override
+    public String getDescription() {
+        return "Says Hello to a provided name in the logs";
     }
 
     public void execute(final FeatureActionContext featureActionContext) {
@@ -36,4 +41,11 @@ public class SayHelloFeatureAction implements FeatureAction<SayHelloFeatureActio
     public Class<SayHelloFeatureActionData> getFeatureActionDataClass() {
         return SayHelloFeatureActionData.class;
     }
+
+    @Override
+    public SayHelloFeatureActionData getSampleActionData() {
+        return SAMPLE;
+    }
+
+    public static final SayHelloFeatureActionData SAMPLE = new SayHelloFeatureActionData("World!");
 }

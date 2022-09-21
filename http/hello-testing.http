@@ -2,5 +2,47 @@ POST http://localhost:4440/api/40/act/hello-world/say-hello
 X-Rundeck-Auth-Token: DevMe
 
 ###
-GET http://localhost:4440/api/40/output/b880151e-bd5f-4115-853f-437e9acdd34f
+POST http://localhost:4440/api/40/act/hello-world/say-hello
 X-Rundeck-Auth-Token: DevMe
+
+{
+"sayHelloTo": "George"
+}
+
+###
+GET http://localhost:4440/api/40/output/413c59e2-f5f7-4996-86fe-23a34f926be4
+X-Rundeck-Auth-Token: DevMe
+
+###
+
+GET http://localhost:4440/api/40/defineActionData/hello-world/say-hello
+X-Rundeck-Auth-Token: DevMe
+
+###
+GET http://localhost:4440/api/40/features/list
+X-Rundeck-Auth-Token: DevMe
+
+###
+GET http://localhost:4440/api/40/feature/hello-world/actions
+X-Rundeck-Auth-Token: DevMe
+
+###
+GET http://localhost:4440/api/40/feature/hello-world/toggleEnabled
+X-Rundeck-Auth-Token: DevMe
+
+{
+"enabled": false
+}
+
+
+###
+#broken feature name
+POST http://localhost:4440/api/40/act/hello-werld/say-hello
+X-Rundeck-Auth-Token: DevMe
+Content-Type: application/json
+
+###
+#broken action name
+POST http://localhost:4440/api/40/act/hello-world/say-hullo
+X-Rundeck-Auth-Token: DevMe
+Content-Type: application/json
