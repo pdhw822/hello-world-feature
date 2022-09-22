@@ -10,7 +10,37 @@ X-Rundeck-Auth-Token: DevMe
 }
 
 ###
-GET http://localhost:4440/api/40/output/413c59e2-f5f7-4996-86fe-23a34f926be4
+POST http://localhost:4440/api/40/act/system-actions/run-sql
+X-Rundeck-Auth-Token: DevMe
+
+{
+  "params": [
+    "2022-01-01"
+  ],
+  "sql": "SELECT count(*) as project_count FROM project WHERE date_created > ?"
+}
+
+###
+POST http://localhost:4440/api/40/act/system-actions/run-sql
+X-Rundeck-Auth-Token: DevMe
+
+{
+  "sql": "SELECT * FROM project"
+}
+
+###
+POST http://localhost:4440/api/40/act/system-actions/dispatch-message
+X-Rundeck-Auth-Token: DevMe
+
+{
+  "topic": "clean-executions",
+  "payload": {
+    "cleanOlderThan": "2022-10-01"
+  }
+}
+
+###
+GET http://localhost:4440/api/40/output/22bb105b-20e4-4b18-b6ad-739318a1b060
 X-Rundeck-Auth-Token: DevMe
 
 ###
@@ -23,15 +53,16 @@ GET http://localhost:4440/api/40/features/list
 X-Rundeck-Auth-Token: DevMe
 
 ###
-GET http://localhost:4440/api/40/feature/hello-world/actions
+GET http://localhost:4440/api/40/feature/system-actions/actions
 X-Rundeck-Auth-Token: DevMe
 
 ###
-GET http://localhost:4440/api/40/feature/hello-world/toggleEnabled
+POST http://localhost:4440/api/40/feature/system-actions/toggleEnabled
 X-Rundeck-Auth-Token: DevMe
+Content-Type: application/json
 
 {
-"enabled": false
+"enabled": true
 }
 
 

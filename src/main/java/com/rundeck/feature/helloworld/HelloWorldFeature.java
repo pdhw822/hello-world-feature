@@ -19,6 +19,11 @@ public class HelloWorldFeature implements Feature<HelloWorldFeatureConfig> {
         return "hello-world";
     }
 
+    @Override
+    public String getDescription() {
+        return "The defacto Hello World as a Rundeck Feature";
+    }
+
     public boolean isEnabled() {
         return enabled;
     }

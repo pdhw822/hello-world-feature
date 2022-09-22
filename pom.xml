@@ -28,7 +28,7 @@
 		<dependency>
 			<groupId>com.github.pdhw822</groupId>
 			<artifactId>rundeck-feature-api-lib</artifactId>
-			<version>v0.6.0</version>
+			<version>v0.7.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
