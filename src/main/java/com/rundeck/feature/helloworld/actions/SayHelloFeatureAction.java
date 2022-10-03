@@ -1,7 +1,7 @@
 package com.rundeck.feature.helloworld.actions;
 
 import com.rundeck.feature.api.action.FeatureAction;
-import com.rundeck.feature.api.context.ContextKey;
+import com.rundeck.feature.api.context.ContextKeys;
 import com.rundeck.feature.api.context.FeatureActionContext;
 import com.rundeck.feature.api.model.CompletionStatus;
 import com.rundeck.feature.api.output.OutputLevel;
@@ -23,9 +23,9 @@ public class SayHelloFeatureAction implements FeatureAction<SayHelloFeatureActio
 
     public CompletionStatus execute(final FeatureActionContext featureActionContext) {
         try {
-            SayHelloFeatureActionData data = featureActionContext.get(ContextKey.ACTION_DATA, SayHelloFeatureActionData.class);
+            SayHelloFeatureActionData data = featureActionContext.get(ContextKeys.ACTION_DATA, SayHelloFeatureActionData.class);
             if(data == null) data = new SayHelloFeatureActionData();
-            HelloWorldFeatureConfig featureConfig = featureActionContext.get(ContextKey.FEATURE_CONFIG, HelloWorldFeatureConfig.class);
+            HelloWorldFeatureConfig featureConfig = featureActionContext.get(ContextKeys.FEATURE_CONFIG, HelloWorldFeatureConfig.class);
             if(featureConfig == null) featureConfig = new HelloWorldFeatureConfig();
             featureActionContext.getEventPublisher().publishOutput(new DefaultActionOutputEvent(featureActionContext.getActionId(),
                     String.format("Hello %s", Optional.ofNullable(data.getSayHelloTo()).orElse(featureConfig.getDefaultSayHelloTo())), featureActionContext.getUser()));
