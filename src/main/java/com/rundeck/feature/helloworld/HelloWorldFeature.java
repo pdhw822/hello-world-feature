@@ -2,6 +2,7 @@ package com.rundeck.feature.helloworld;
 
 import com.rundeck.feature.api.Feature;
 import com.rundeck.feature.api.action.FeatureAction;
+import com.rundeck.feature.helloworld.actions.EchoFeatureAction;
 import com.rundeck.feature.helloworld.actions.SayHelloFeatureAction;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +14,8 @@ import java.util.Optional;
 public class HelloWorldFeature implements Feature<HelloWorldFeatureConfig> {
     boolean enabled = true;
 
-    Map<String, FeatureAction<?>> features = Map.of(SayHelloFeatureAction.ACTION, new SayHelloFeatureAction());
+    Map<String, FeatureAction<?>> features = Map.of(SayHelloFeatureAction.ACTION, new SayHelloFeatureAction(),
+            EchoFeatureAction.ACTION, new EchoFeatureAction());
     HelloWorldFeatureConfig config = new HelloWorldFeatureConfig();
     public String getName() {
         return "hello-world";

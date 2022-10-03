@@ -7,20 +7,22 @@ public class DefaultActionOutputEvent implements ActionOutputEvent {
     String actionId;
     OutputLevel level;
     String message;
+    String user;
     Long timestamp;
 
     public DefaultActionOutputEvent() {
     }
 
-    public DefaultActionOutputEvent(String actionId, String message) {
-        this(actionId, OutputLevel.NORMAL, message, System.nanoTime());
+    public DefaultActionOutputEvent(String actionId, String message, String user) {
+        this(actionId, OutputLevel.NORMAL, message, user, System.nanoTime());
     }
 
-    public DefaultActionOutputEvent(String actionId, OutputLevel level, String message, Long timestamp) {
+    public DefaultActionOutputEvent(String actionId, OutputLevel level, String message, String user, Long timestamp) {
         this.actionId = actionId;
         this.level = level;
         this.message = message;
         this.timestamp = timestamp;
+        this.user = user;
     }
 
     public String getActionId() {
@@ -53,5 +55,14 @@ public class DefaultActionOutputEvent implements ActionOutputEvent {
 
     public void setTimestamp(Long timestamp) {
         this.timestamp = timestamp;
+    }
+
+    @Override
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
     }
 }
